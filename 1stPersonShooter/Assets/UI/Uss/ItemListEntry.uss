@@ -1,0 +1,18 @@
+ #list-entry {
+        height: 41px;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: center;       
+    }
+
+    #item-name {
+        -unity-font-style: bold;
+        font-size: 18px;
+        color: rgba(0, 150, 0, 0.75);
+    }
+
+    #item-toggle{
+      color: green;
+    }
+
+   

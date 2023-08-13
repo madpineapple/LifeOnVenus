@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/ItemListEntry.uss?fileID=7433441132597879392&amp;guid=af9e899156514334c8b29c95e9836bc8&amp;type=3#ItemListEntry" />
+    <ui:VisualElement name="list-entry" style="flex-direction: row width 100%; -unity-background-image-tint-color: rgb(61, 219, 74); color: rgb(29, 87, 35);">
+        <ui:Toggle name="item-toggle" />
+        <ui:Label text="Label" name="item-name" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/InventoryUI.uss?fileID=7433441132597879392&amp;guid=0616479fe6dd331439b7a36257f8c774&amp;type=3#InventoryUI" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: none;">
+        <ui:VisualElement name="main-container" style="flex-grow: 1; background-color: rgb(19, 18, 18); background-image: none; align-self: auto; left: 200px; flex-direction: column;">
+            <ui:VisualElement name="tabBar" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; top: auto; position: relative; height: auto; max-height: 10%;">
+                <ui:Button text="Stats" display-tooltip-when-elided="true" name="stats-button" />
+                <ui:Button text="Inv" display-tooltip-when-elided="true" name="inventory-button" />
+            </ui:VisualElement>
+            <ui:VisualElement name="content-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
