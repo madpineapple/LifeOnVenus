@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LootingEntryController : MonoBehaviour
+public class LootingListEntryController : MonoBehaviour
 {
   Label NameLabel;
 

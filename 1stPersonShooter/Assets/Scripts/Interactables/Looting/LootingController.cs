@@ -11,34 +11,43 @@ public class LootingController
   Label CharClassLabel;
   Label CharNameLabel;
 
+  VisualElement listViewContainer;
+  GameObject player;
+  GameObject lootedItem;
+string lootedItemName;
 
-
-  public void InitializeItemLists(VisualElement root, VisualTreeAsset listElementTemplate)
+  public void InitializeItemLists(VisualElement root, VisualTreeAsset listElementTemplate, List<ItemData> itemData, string lootableItemName)
   {
-    EnumerateAllItems();
+    EnumerateAllLootableItems(itemData);
+    listViewContainer = root.Q<VisualElement>("list-view-container");
 
     ListEntryTemplate = listElementTemplate;
 
-    ItemList = root.Q<ListView>("item-list");
+    ListView listView = new();
+    ItemList = listView;
+    ItemList.name = "item-list";
+    listViewContainer.Add(ItemList);
 
 
     FillItemList();
-
+    lootedItemName = lootableItemName;
     ItemList.selectionChanged += OnItemSelected;
 
   }
 
   List<ItemData> AllItems;
+  List<ItemData> PlayerItems;
 
 
-  void EnumerateAllItems()
+  void EnumerateAllLootableItems(List<ItemData> lootList)
   {
     AllItems = new List<ItemData>();
-    AllItems.AddRange(Resources.LoadAll<ItemData>("Items"));
+    AllItems = lootList;
   }
 
   void FillItemList()
   {
+    
     // Set up a make item function for a list entry
     ItemList.makeItem = () =>
     {
@@ -46,7 +55,7 @@ public class LootingController
       var newListEntry = ListEntryTemplate.Instantiate();
 
       // Instantiate a controller for the data
-      var newListEntryLogic = new InventoryListEntryController();
+      var newListEntryLogic = new LootingListEntryController();
 
       // Assign the controller script to the visual element
       newListEntry.userData = newListEntryLogic;
@@ -61,7 +70,7 @@ public class LootingController
     // Set up bind function for a specific list entry
     ItemList.bindItem = (item, index) =>
     {
-      (item.userData as InventoryListEntryController).SetItemData(AllItems[index]);
+      (item.userData as LootingListEntryController).SetLootableListData(AllItems[index]);
     };
 
     // Set a fixed item height
@@ -76,19 +85,27 @@ public class LootingController
 
     // Get the currently selected item directly from the ListView
     var selectedItem = ItemList.selectedItem as ItemData;
-    Debug.Log(selectedItem);
-    // Handle none-selection (Escape to deselect everything)
-    if (selectedItem == null)
-    {
-      // Clear
-      CharClassLabel.text = "";
-      CharNameLabel.text = "";
+    player = GameObject.FindWithTag("Player");
+    PlayerItems = new List<ItemData>();
+    PlayerItems.AddRange(player.GetComponent<InventoryList>().items);
+    PlayerItems.Add(selectedItem);
+    player.GetComponent<InventoryList>().items = PlayerItems;
+    lootedItem = GameObject.Find(lootedItemName);
+    AllItems.Remove(selectedItem);
+    lootedItem.GetComponent<InventoryList>().items = AllItems;
+    UpdateUI();
+  }
 
-      return;
-    }
+  public void UpdateUI(){
+        listViewContainer.Clear();
 
-    // Fill in character details
-    CharClassLabel.text = selectedItem.ItemClass.ToString();
-    CharNameLabel.text = selectedItem.ItemName;
+    ListView listView = new();
+    ItemList = listView;
+    ItemList.name = "item-list";
+    listViewContainer.Add(ItemList);
+
+    FillItemList();
+   ItemList.selectionChanged += OnItemSelected;
+
   }
 }

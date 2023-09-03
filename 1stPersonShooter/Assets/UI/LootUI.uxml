@@ -1,8 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Uss/Lootable.uss?fileID=7433441132597879392&amp;guid=fc5eed718d69d1e4f918c1a963ff17c3&amp;type=3#Lootable" />
-    <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0) background-image none;">
-        <ui:VisualElement name="main-container" style="flex-grow: 1; background-color: rgba(83, 176, 72, 0);">
-            <ui:ListView focusable="true" />
+    <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgb(241, 243, 219) background-image none; margin-left: 20%; width: 20%; height: 50px; margin-bottom: 20%; margin-top: 20%; margin-right: 10%;">
+        <ui:VisualElement name="main-container" style="flex-grow: 1; background-color: rgba(83, 176, 72, 0); width: auto; height: 194px;">
+            <ui:VisualElement name="title-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                <ui:Label tabindex="-1" text="Box Items" display-tooltip-when-elided="true" name="Label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="list-view-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                <ui:ListView focusable="true" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

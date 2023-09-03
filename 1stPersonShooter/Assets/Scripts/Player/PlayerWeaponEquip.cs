@@ -8,6 +8,7 @@ public class PlayerWeaponEquip : MonoBehaviour
   public GameObject primaryPrefab;
   public GameObject secondaryPrefab;
   private GameObject currentlyEquippedWepaon;
+
   public Transform parent;
   private void Start()
   {
@@ -39,5 +40,15 @@ public class PlayerWeaponEquip : MonoBehaviour
   {
      currentlyEquippedWepaon = Instantiate(secondaryPrefab, parent.position, parent.rotation, parent);
     currentlyEquippedWepaon.GetComponent<Rigidbody>().isKinematic = true;
+  }
+  public void setSecondaryWeaponPrefab(ItemData itemData)
+  {
+    if(itemData.isEquipped != true){
+      secondaryPrefab = null;
+    }
+    if(itemData.isEquipped == true)
+    {
+    secondaryPrefab = itemData.objectPrefab;
+    }
   }
 }

@@ -14,5 +14,8 @@ public enum EItemClass
 public class ItemData : ScriptableObject
 {
   public string ItemName;
+
+  public GameObject objectPrefab;
+  public bool isEquipped;
   public EItemClass ItemClass;
 }

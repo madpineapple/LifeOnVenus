@@ -60,7 +60,7 @@ public class PlayerAttack : MonoBehaviour
     if (WeaponHolder.transform.childCount > 0)
     {
       equippedWeapon = WeaponHolder.transform.GetChild(0).gameObject;
-
+     
       if (equippedWeapon.gameObject.tag == "melee")
         Debug.Log("Whack!");
       if (equippedWeapon.gameObject.tag == "gun")

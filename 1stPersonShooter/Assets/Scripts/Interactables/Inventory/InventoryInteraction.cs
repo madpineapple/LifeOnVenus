@@ -13,9 +13,14 @@ public class InventoryInteraction : MonoBehaviour
   [SerializeField]
   public GameObject inventoryScreen;
 
+  [SerializeField]
+  public GameObject lootInventoryScreen;
+
   public static bool inventoryScreenOpened;
+  public static bool lootInventoryScreenOpened;
 
   private UIDocument uiDocument;
+  private UIDocument lootUIDocument;
 
   [SerializeField]
   VisualTreeAsset ListEntryTemplate;
@@ -27,7 +32,9 @@ public class InventoryInteraction : MonoBehaviour
     inputManager = GetComponent<InputManager>();
     playerAttack = GetComponent<PlayerAttack>();
     inventoryScreen.SetActive(false);
+    lootInventoryScreen.SetActive(false);
     uiDocument = inventoryScreen.GetComponent<UIDocument>();
+    lootUIDocument = lootInventoryScreen.GetComponent<UIDocument>();
   }
 
   void Update()
@@ -36,19 +43,31 @@ public class InventoryInteraction : MonoBehaviour
     {
       inventoryScreenOpened = !inventoryScreenOpened;
       InventoryScreenOpened();
-
       // Initialize the character list controller
       var itemListController = new InventoryListController();
       itemListController.InitializeInventory(uiDocument.rootVisualElement, ListEntryTemplate);
     }
     }
 
-  public void LootingInventoryInteraction()
+  public void LootingInventoryInteraction(List<ItemData> lootList, string lootableItemName)
   {
-    inventoryScreenOpened = !inventoryScreenOpened;
-    InventoryScreenOpened();
-    var lootingListController = new LootingController();
-    lootingListController.InitializeItemLists(uiDocument.rootVisualElement, LootingListEntryTemplate);
+    lootInventoryScreenOpened = !lootInventoryScreenOpened;
+    
+    if (lootInventoryScreenOpened)
+    {
+      lootInventoryScreen.SetActive(true);
+       Time.timeScale = 0f;
+      playerAttack.readyToShoot = false;
+      var lootingListController = new LootingController();
+      lootingListController.InitializeItemLists(lootUIDocument.rootVisualElement, ListEntryTemplate, lootList, lootableItemName);
+    }
+    else
+    {
+      lootInventoryScreen.SetActive(false);
+      Time.timeScale = 1;
+      playerAttack.readyToShoot = true;
+    }
+   
   }
 
   public void InventoryScreenOpened()

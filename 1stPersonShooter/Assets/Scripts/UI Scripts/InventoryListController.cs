@@ -66,13 +66,14 @@ public class InventoryListController
     {
       name = "item-name"
     };
+    
+
     detailsContainer.Add(CharClassLabel);
     detailsContainer.Add(CharNameLabel);
     
     FillItemList();
 
     ItemList.selectionChanged+= OnItemSelected;
-
   }
 
   List<ItemData> AllItems;
